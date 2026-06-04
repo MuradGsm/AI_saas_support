@@ -9,7 +9,6 @@ venv/
 .mypy_cache/
 .ruff_cache/
 
-# Env файлы (содержат секреты — никогда в git!)
 .env
 *.env.local
 
