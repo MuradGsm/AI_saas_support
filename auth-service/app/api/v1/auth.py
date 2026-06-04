@@ -28,3 +28,8 @@ async def login(
 @router.get('/me', response_model=UserResponse)
 async def get_me(current_user: User = Depends(get_current_user)):
     return current_user
+
+
+@router.get("/internal/verify-token")
+async def verify_token(current_user: User = Depends(get_current_user)):
+    return {"user_id": str(current_user.id)}
