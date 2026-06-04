@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv/
+alembic/versions/
+.env
+*.egg-info/

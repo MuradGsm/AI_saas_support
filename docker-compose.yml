@@ -69,6 +69,24 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  
+  auth-service:
+    build: ./auth-service
+    container_name: saas_auth
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./auth-service:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
 
 volumes:
   postgres_data:
