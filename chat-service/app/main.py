@@ -1,11 +1,12 @@
 from fastapi import FastAPI
-
+from app.api.v1.chat import router as chat_router
 
 app =  FastAPI(
     title="Chat Service",
     version='0.1.0',
 )
 
+app.include_router(chat_router)
 
 @app.get('/health')
 async def health_chat_service():
