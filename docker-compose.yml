@@ -87,6 +87,24 @@ services:
     volumes:
       - ./auth-service:/app
     command: uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
+  
+  chat-service:
+    build: ./chat-service
+    container_name: saas_chat
+    ports:
+      - "8002:8002"
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./chat-service:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8002 --reload
 
   nginx:
     image: nginx:alpine
