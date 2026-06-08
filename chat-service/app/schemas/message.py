@@ -1,0 +1,17 @@
+from pydantic import BaseModel, ConfigDict
+from uuid import UUID
+from datetime import datetime
+
+class MessageCreate (BaseModel):
+    content: str
+    role: str = "user"
+
+
+class MessageResponse(BaseModel):
+    id: UUID
+    conversation_id: UUID
+    role: str
+    content: str 
+    created_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)
